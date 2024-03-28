@@ -1,0 +1,13 @@
+FROM node
+
+WORKDIR /app
+
+ENV PORT=3030
+
+COPY . .
+
+RUN npm i
+
+EXPOSE ${PORT}
+
+CMD ["node","app.js"]

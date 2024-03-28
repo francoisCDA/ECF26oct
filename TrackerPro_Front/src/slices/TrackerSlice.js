@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+const PORT = process.env.PORT_API || 3030 ;
+const IP = process.env.IP_API || "127.0.0.1";
 
-const URL_TrackerProAPI = "http://127.0.0.1:3030/projects";
+const URL_TrackerProAPI = `http://${IP}:${PORT}/projects`;
 
 
 export const axiosGetAllProjects = createAsyncThunk(

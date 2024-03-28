@@ -4,10 +4,19 @@ import cors from "cors"
  
 
 const projectDao = new ProjectDAO();
+const PORT = process.env.PORT || 3030;
+const ORIGIN_REQUEST = process.env.ORIGIN_REQUEST || "http://trackerp-front"
 
 const app = express();
 
-app.use(cors());
+
+const corsOption ={
+    origin : `${ORIGIN_REQUEST}`,
+    optionsSuccessStatus: 200
+}
+
+
+app.use(cors(corsOption));
 app.use(express.json());
 
 app.get('/projects', (req,res) => {
@@ -39,7 +48,7 @@ app.put('/projects/:idProject', (req,res) => {
 })
 
 
-app.listen(3030, () => {
+app.listen(PORT, () => {
     projectDao.initProjects();
-    console.log('http://127.0.0.1:3030');
+    console.log(`http://127.0.0.1:${PORT}`);
 }) 
