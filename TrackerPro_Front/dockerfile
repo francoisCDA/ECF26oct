@@ -3,7 +3,8 @@ FROM node as build
 WORKDIR /app
 
 ENV PORT_API=3030
-ENV IP_API="127.0.0.1"
+ENV IP_API=172.20.0.25 
+#aucun impact
 
 COPY . .
 

@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./TrackerPro_API
+      dockerfile: dockerfile
+    container_name: trackerp_api
+    restart: always
+    environment:
+      - PORT=3030
+      - ORIGIN_REQUEST=172.20.0.0/20
+    ports:
+      - "3030:3030" 
+    volumes:
+      - json_db:/app/DB_TRACKER_PRO
+    networks:
+      - trackerpro_net
+  
+  front:
+    build:
+      context: ./TrackerPro_Front
+      dockerfile: dockerfile
+    container_name: trackerp_front
+    restart: always
+    environment:
+      - PORT_API=3030
+      - IP_API=172.20.0.5 #aucun impact
+    depends_on:
+      - api
+    networks:
+      - trackerpro_net
+    ports:
+      - "80:80"
+
+
+networks:
+  trackerpro_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+      - subnet: 172.20.0.0/16
+
+
+volumes:
+  json_db:

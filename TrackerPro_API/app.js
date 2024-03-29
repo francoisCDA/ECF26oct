@@ -5,7 +5,10 @@ import cors from "cors"
 
 const projectDao = new ProjectDAO();
 const PORT = process.env.PORT || 3030;
-const ORIGIN_REQUEST = process.env.ORIGIN_REQUEST || "http://trackerp-front"
+const ORIGIN_REQUEST = process.env.ORIGIN_REQUEST || "127.0.0.1"
+
+console.log("PORT : " + PORT);
+console.log("ORIGIN_REQUEST : " + ORIGIN_REQUEST);
 
 const app = express();
 
@@ -16,10 +19,12 @@ const corsOption ={
 }
 
 
-app.use(cors(corsOption));
+//app.use(cors(corsOption));
+app.use(cors());
 app.use(express.json());
 
 app.get('/projects', (req,res) => {
+    console.log("ORIGIN_REQUEST : " + ORIGIN_REQUEST);
     res.json(projectDao.getAllProjects())
 })
 

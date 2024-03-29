@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      context: ./TrackerPro_API
+      dockerfile: dockerfile
+    container_name: trackerp_api
+    restart: always
+    environment:
+      - PORT=3030
+      - ORIGIN_REQUEST=127.0.0.1 # inutile, sensée configuré les cors, n'est plus utilsé dans app.js
+    ports:
+      - "3030:3030"
+    volumes:
+      - json_db:/app/DB_TRACKER_PRO
+  
+  front:
+    build:
+      context: ./TrackerPro_Front
+      dockerfile: dockerfile
+    container_name: trackerp_front
+    restart: always
+    environment:
+      - PORT_API=3030
+      - IP_API=192.168.1.89 #aucun impact : les requetes restent effectuées sur 127.0.0.1:3030, valeur par defaut dans TrackSlice.js
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
+
+volumes:
+  json_db:
