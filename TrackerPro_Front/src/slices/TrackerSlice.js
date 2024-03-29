@@ -6,11 +6,11 @@ const IP = process.env.IP_API || "127.0.0.1";
 
 const URL_TrackerProAPI = `http://${IP}:${PORT}/projects`;
 
-console.log("api : " + URL_TrackerProAPI);
 
 export const axiosGetAllProjects = createAsyncThunk(
     "trackerpro/axiosGetAllProjects",
     async () => {
+        console.log("url_api : " + URL_TrackerProAPI);
         try {
             
             const reponse = await axios.get(`${URL_TrackerProAPI}`);

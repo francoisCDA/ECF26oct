@@ -1,9 +1,12 @@
 FROM node as build
 
+ARG PORT_API
+ARG IP_API
+
 WORKDIR /app
 
-ENV PORT_API=3030
-ENV IP_API=172.20.0.25 
+ENV PORT_API=${PORT_API}
+ENV IP_API=${IP_API}
 #aucun impact
 
 COPY . .

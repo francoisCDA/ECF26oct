@@ -7,9 +7,9 @@ services:
       dockerfile: dockerfile
     container_name: trackerp_api
     restart: always
-    environment:
-      - PORT=3030
-      - ORIGIN_REQUEST=172.20.0.0/20
+#    environment:
+#      - PORT=3030
+#      - ORIGIN_REQUEST=172.20.0.0/20 # tentative de configuration des cors, 
     ports:
       - "3030:3030" 
     volumes:
@@ -21,18 +21,20 @@ services:
     build:
       context: ./TrackerPro_Front
       dockerfile: dockerfile
+      args:
+        - PORT_API=3031 # aucun effet
+        - IP_API=192.168.1.89 # aucun effet
     container_name: trackerp_front
     restart: always
-    environment:
-      - PORT_API=3030
-      - IP_API=172.20.0.5 #aucun impact
+ #   environment:
+ #     - PORT_API=3030
+ #     - IP_API=172.20.0.5 #aucun impact
     depends_on:
       - api
     networks:
       - trackerpro_net
     ports:
       - "80:80"
-
 
 networks:
   trackerpro_net:
@@ -41,7 +43,6 @@ networks:
      driver: default
      config:
       - subnet: 172.20.0.0/16
-
 
 volumes:
   json_db:

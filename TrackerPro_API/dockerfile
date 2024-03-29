@@ -2,7 +2,7 @@ FROM node
 
 WORKDIR /app
 
-ENV PORT=3030
+#ENV PORT=3030
 
 COPY . .
 
