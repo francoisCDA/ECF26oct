@@ -9,7 +9,7 @@ services:
     restart: always
     environment:
       - PORT=3030
-      - ORIGIN_REQUEST=127.0.0.1 # inutile, sensée configuré les cors, n'est plus utilsé dans app.js
+      - ORIGIN_REQUEST=127.0.0.1 # inutile, censé configurer les cors, n'est plus utilsé dans app.js
     ports:
       - "3030:3030"
     volumes:
@@ -23,7 +23,7 @@ services:
     restart: always
     environment:
       - PORT_API=3030
-      - IP_API=192.168.1.89 #aucun impact : les requetes restent effectuées sur 127.0.0.1:3030, valeur par defaut dans TrackSlice.js
+      - IP_API=192.168.1.89 #aucun impact : les requetes restent effectuées sur 127.0.0.1:3030, valeur par defaut dans TrackSlice.js,
     depends_on:
       - api
     ports:
